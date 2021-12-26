@@ -15,11 +15,6 @@ public class Matrix {
         this.size_b = size_b;
         this.matrix = matrix;
 
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 3; j++) {
-                this.matrix[i][j] = matrix[i][j];
-            }
-        }
     }
 
     public void print() {
@@ -106,23 +101,4 @@ public class Matrix {
             matrix[exchange_line][j] = temp;
         }
     }
-
-
-    /*
-
-    public void gauss_step(int row) {
-
-        for (int i = row + 1; i < size_a; i++) {
-            if (matrix[i][row] != 0) {
-                int init_factor = matrix[row][row];
-                int k_factor = matrix[i][row];
-
-                for (int j = 0; j < size_b; j++) {
-                    matrix[i][j] = matrix[i][j] * init_factor - matrix[row][j] * k_factor;
-                }
-            }
-        }
-    }
-     */
-
 }
