@@ -56,7 +56,9 @@ public class Matrix {
         int init_line = row;
 
         if (init_comp == 0) {
-            for (int i = row; i < size_a; i++){
+
+            for (int i = row; i < size_a; i++) {
+
                 if (matrix[i][row] != 0) {
                     gauss_line_exchange(init_line, i);
                     init_line = i;
@@ -82,10 +84,12 @@ public class Matrix {
 
         for (int i = row + 1; i < size_a; i++) {
             if (matrix[i][row] != 0) {
-                double factor = matrix[i][row] / (matrix[row][row] * 1.0);
+
+                int init_factor = matrix[row][row];
+                int k_factor = matrix[i][row];
 
                 for (int j = 0; j < size_b; j++) {
-                    matrix[i][j] -= factor * matrix[row][j];
+                    matrix[i][j] = matrix[i][j] * init_factor - matrix[row][j] * k_factor;
                 }
             }
         }
@@ -103,5 +107,22 @@ public class Matrix {
         }
     }
 
+
+    /*
+
+    public void gauss_step(int row) {
+
+        for (int i = row + 1; i < size_a; i++) {
+            if (matrix[i][row] != 0) {
+                int init_factor = matrix[row][row];
+                int k_factor = matrix[i][row];
+
+                for (int j = 0; j < size_b; j++) {
+                    matrix[i][j] = matrix[i][j] * init_factor - matrix[row][j] * k_factor;
+                }
+            }
+        }
+    }
+     */
 
 }
