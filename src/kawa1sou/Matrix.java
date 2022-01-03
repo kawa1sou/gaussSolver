@@ -5,14 +5,14 @@ Basically everything is in here
  */
 public class Matrix {
 
-    public int size_a;
-    public int size_b;
-    public int[][] matrix = new int[size_a][size_b];
+    public int sizeA;
+    public int sizeB;
+    public int[][] matrix;
 
-    public Matrix(int size_a, int size_b, int [][] matrix) {
+    public Matrix(int sizeA, int sizeB, int [][] matrix) {
 
-        this.size_a = size_a;
-        this.size_b = size_b;
+        this.sizeA = sizeA;
+        this.sizeB = sizeB;
         this.matrix = matrix;
 
     }
@@ -20,8 +20,8 @@ public class Matrix {
     public void print() {
 
         System.out.println("----------------------------------------------");
-        for(int i = 0; i < size_a; i++) {
-            for(int j = 0; j < size_b; j++) {
+        for(int i = 0; i < sizeA; i++) {
+            for(int j = 0; j < sizeB; j++) {
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println("");
@@ -31,10 +31,10 @@ public class Matrix {
     /*
     Main function for Gauss method
      */
-    public void gauss_solve() {
-        for (int j = 0; j < size_b - 1; j++) {
-            if(gauss_step_check(j) == 1)
-                gauss_step(j);
+    public void gaussSolve() {
+        for (int j = 0; j < sizeB - 1; j++) {
+            if(gaussStepCheck(j) == 1)
+                gaussStep(j);
         }
     }
 
@@ -42,28 +42,28 @@ public class Matrix {
     Checks if there's a point to do a step on a specific row, return 1 if yes, 0 otherwise.
     Firstly, searches for a line with non-zero value on a needed row.
     Thenceforth, checks if there's at least one line beside one found at the first point
-    Also uses lines exchange method, so the line, which is being subtracked from the other ones is on row'th position
+    Also uses lines exchange method, so the line, which is being subtracted from the other ones is on row'th position
      */
 
-    public int gauss_step_check(int row) {
+    public int gaussStepCheck(int row) {
 
-        int init_comp = matrix[row][row];
-        int init_line = row;
+        int initComp = matrix[row][row];
+        int initLine = row;
 
-        if (init_comp == 0) {
+        if (initComp == 0) {
 
-            for (int i = row; i < size_a; i++) {
+            for (int i = row; i < sizeA; i++) {
 
                 if (matrix[i][row] != 0) {
-                    gauss_line_exchange(init_line, i);
-                    init_line = i;
+                    gaussLineExchange(initLine, i);
+                    initLine = i;
                     break;
                 }
             }
         }
 
-        for (int i = 0; i < size_a; i++) {
-            if (matrix[i][row] != 0 && i != init_line) {
+        for (int i = 0; i < sizeA; i++) {
+            if (matrix[i][row] != 0 && i != initLine) {
                 return 1;
             }
         }
@@ -75,15 +75,15 @@ public class Matrix {
     Performs the Gauss step
      */
 
-    public void gauss_step(int row) {
+    public void gaussStep(int row) {
 
-        for (int i = row + 1; i < size_a; i++) {
+        for (int i = row + 1; i < sizeA; i++) {
             if (matrix[i][row] != 0) {
 
                 int init_factor = matrix[row][row];
                 int k_factor = matrix[i][row];
 
-                for (int j = 0; j < size_b; j++) {
+                for (int j = 0; j < sizeB; j++) {
                     matrix[i][j] = matrix[i][j] * init_factor - matrix[row][j] * k_factor;
                 }
             }
@@ -91,14 +91,14 @@ public class Matrix {
     }
 
     /*
-    Simple line exchange, used in gauss_step_check method
+    Simple line exchange, used in gaussStepCheck method
      */
 
-    public void gauss_line_exchange(int init_line, int exchange_line) {
-        for (int j = 0; j < size_b; j++) {
-            int temp = matrix[init_line][j];
-            matrix[init_line][j] = matrix[exchange_line][j];
-            matrix[exchange_line][j] = temp;
+    public void gaussLineExchange(int initLine, int exchangeLine) {
+        for (int j = 0; j < sizeB; j++) {
+            int temp = matrix[initLine][j];
+            matrix[initLine][j] = matrix[exchangeLine][j];
+            matrix[exchangeLine][j] = temp;
         }
     }
 }

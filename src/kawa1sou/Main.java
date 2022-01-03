@@ -41,7 +41,7 @@ public class Main {
         Matrix matrix = new Matrix(5 ,5, a);
 
         matrix.print();
-        matrix.gauss_solve();
+        matrix.gaussSolve();
         matrix.print();
 
     }
